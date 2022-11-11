@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Col, Row, Form, Image } from 'react-bootstrap';
 
 const Contact = ({ contact, ids, setIds }) => {
 
@@ -31,13 +32,30 @@ const Contact = ({ contact, ids, setIds }) => {
   })
 
   return (
-    <li>
-      <div>
-        <img src={contact.avatar} />
-        {contact.first_name} {contact.last_name}
-        <input type="checkbox" checked={checked} onChange={(event) => onToggleCheckbox(event, contact.id)}/>
-      </div>
-    </li>
+    <div>
+      <Row>
+        <Col md={2}>
+          <Image
+            roundedCircle
+            height={50}
+            width={50}
+            src={contact.avatar ? contact.avatar : `${process.env.PUBLIC_URL}/avatar.png`}
+          />
+        </Col>
+        <Col md={8}>
+          <div align="start">
+            {contact.first_name} {contact.last_name}
+          </div>
+        </Col>
+        <Col md={2}>
+          <Form.Check
+            type="checkbox"
+            checked={checked}
+            onChange={(event) => onToggleCheckbox(event, contact.id)}
+          />
+        </Col>
+      </Row>
+    </div>
   )
 }
 

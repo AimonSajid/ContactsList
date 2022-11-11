@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { USERS_URL } from "../constants/urls";
 import Contact from './Contact';
+import { Container, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 
 const ContactList = () => {
 
@@ -46,12 +47,25 @@ const ContactList = () => {
 
   return (
     <div>
-      Search : <input type='text' value={nameToSearch} onChange={(event) => setNameToSearch(event.target.value)} />
-      <ul>
-        {filtered.map((contact) => {
-          return <Contact key={contact.id} ids={ids} setIds={setIds} contact={contact} />
-        })}
-      </ul>
+      <Container>
+        <Form.Group className="m-3">
+          <Form.Control
+            type="text"
+            value={nameToSearch}
+            placeholder="Search here..."
+            onChange={(event) => setNameToSearch(event.target.value)}
+          />
+        </Form.Group>
+        <ListGroup>
+          {filtered.map((contact) => {
+            return (
+              <ListGroupItem key={contact.id}>
+                <Contact ids={ids} setIds={setIds} contact={contact} />
+              </ListGroupItem>
+            )
+          })}
+        </ListGroup>
+      </Container>
     </div>
   )
 }
